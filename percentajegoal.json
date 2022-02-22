@@ -1,0 +1,61 @@
+[{
+    "name": "Richard Celis",
+    "percentGoal": 0.83,
+    "goals": 13,
+    "height": 6
+},
+{
+    "name": "Lucas Gomez",
+    "percentGoal": 0.81,
+    "goals": 8,
+    "height": 5
+},
+{
+    "name": "Anuar Pelaz",
+    "percentGoal": 0.77,
+    "goals": 10,
+    "height": 5
+},
+{
+    "name": "Leomar Mosquera",
+    "percentGoal": 0.62,
+    "goals": 5,
+    "height": 7
+},
+{
+    "name": "Yanowsky Reyes",
+    "percentGoal": 0.61,
+    "goals": 10,
+    "height": 8
+},
+{
+    "name": "Juan Carlos Ortiz",
+    "percentGoal": 0.6,
+    "goals": 13,
+    "height": 8
+},
+{
+    "name": "Samson Akinyoola",
+    "percentGoal": 0.53,
+    "goals": 12,
+    "height": 8
+},
+{
+    "name": "Néstor Adrián Fernández",
+    "percentGoal": 0.56,
+    "goals": 12,
+    "height": 8
+},
+{
+    "name": "Joel Infante",
+    "percentGoal": 0.51,
+    "goals": 11,
+    "height": 8
+},
+{
+    "name": "Tommy Tobar",
+    "percentGoal": 0.54,
+    "goals": 11,
+    "height": 5
+}
+]

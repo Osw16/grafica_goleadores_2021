@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+  rel="stylesheet"
+/>
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+<style>
+  body {
+    display:grid;
+    justify-content: center;
+  }
+  svg {
+    border: 1px solid rgba(255, 255, 255, 0.349);
+  }
+  .yAxis path {
+    stroke: #b8b8b8;
+  }
+  .xAxis path {
+    stroke: #b8b8b8;
+  }
+  text {
+    font-family: "Share Tech Mono", monospace;
+    letter-spacing: 3px;
+  }
+  .Ylabel {
+    font-size:20px;
+  }
+  .Xlabel {
+    font-size:20px;
+  }
+  svg > g > g.yAxis > g:nth-child(1) > text {
+
+    fill:#232323;
+  }
+</style>
+<body></body>
+<script>
+  d3.json("percentajegoal.json", function (data) {
+    var margin = { top: 100, right: 50, bottom: 70, left: 100 },
+      width = 820 - margin.left - margin.right,
+      height = 820 - margin.top - margin.bottom;
+
+    const svg = d3
+      .select("body")
+      .style("background-color", "#232323")
+      .append("svg") //grabs body and appends an svg
+      .attr("width", 927)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    const xScale = d3.scaleLinear().domain([2, 14]).range([0, width]);
+
+    const yScale = d3.scaleLinear().domain([0.4, 0.9]).range([height, 0]);
+    // AXES
+
+    // const xAxis = d3.axisBottom(xScale);
+    const xAxisGroup = svg
+      .append("g")
+      .attr("class", "xAxis") //gives group the classes 'x' and 'axis'
+      .attr("transform", "translate(10," + height + ")")
+      .call(
+        d3
+          .axisBottom(xScale)
+          .tickSize(-height * 1.3)
+          .ticks(6)
+      )
+      .select(".domain").remove()
+    const yAxis = d3.axisLeft(yScale);
+    const yAxisGroup = svg
+      .append("g")
+      .attr("class", "yAxis") //gives group the classes 'y' and 'axis'
+      // .attr("transform", "translate(0,250)")
+      .call(
+        d3
+          .axisLeft(yScale)
+          .tickSize(-width * 1.3)
+          .ticks(7)
+          // .tickSizeOuter(3)
+      )
+      .select(".domain").remove()
+
+    // Customization
+    svg
+      .selectAll(".tick text")
+      // .attr("stroke", "white")
+      .attr("fill", "white")
+      .style("font-size", 20);
+    svg.selectAll(".tick line").attr("stroke", "#ff00ff59");
+    
+
+    // create ufoGroup
+    const ufoGroup = svg
+      .selectAll(".ufoGroup")
+      .data(data)
+      .enter()
+      .append("g")
+      .attr("class", "ufoGroup")
+      .attr("transform", function (d) {
+        return (
+          "translate(" + xScale(d.goals) + "," + yScale(d.percentGoal) + ")"
+        );
+      });
+
+    ufoGroup
+      .append("circle")
+      .attr("class", "ufoCircle")
+      .attr("r", 10)
+      .style("fill", "black")
+      .style("stroke", "white")
+      .style("stroke-width", 1);
+    //append text to ufoGroup
+    ufoGroup
+      .append("text")
+      .attr("class", "ufoText")
+      .attr("dx", -5)
+      .attr("dy", 6)
+      .style("fill", "white")
+      .text(function (d) {
+        return d.name;
+      });
+
+      // Y axis label
+      svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("class", "Ylabel")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -margin.left+20)
+        .attr("x", -margin.top)
+        .text("1 Gol cada 90 Min")
+        .style("fill", "white")
+      // X axis label
+      svg.append("text")
+        .attr("class", "Xlabel")
+        .attr("text-anchor", "end")
+        // .attr("transform", "rotate(-90")
+        .attr("x", width)
+        .attr("y", width + 30)
+        .text("Goles Temporada 2021")
+        .style("fill", "white")
+  });
+</script>
